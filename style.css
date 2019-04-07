@@ -1,0 +1,407 @@
+/*
+Theme Name: Pollster
+Theme URI: http://pollster.refined.works/
+Author: fano
+Author URI: https://dribbble.com/fano
+Description: Pollster is a FREE WordPress theme for measuring likeability or popularity between two contestants.
+Version: 2.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: black, white, light, one-column, two-columns, flexible-width, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+/*
+------------------------------------------------------
+GENERAL LAYOUT
+------------------------------------------------------
+*/
+
+html {
+	font-size: 100%;
+	overflow-y: scroll;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+body {
+	background:#FFF;
+	font: .9rem/1.4rem Arial, Helvetica, sans-serif;
+	color:#000;
+	position:relative;
+	padding-top: 56px;
+}
+a, a:visited {
+	color: #000;
+	text-decoration: none;
+}
+	a:active, a:hover, a:focus {
+		color: #F00;
+		text-decoration: none;
+	}
+	a.text-inherit {
+		color: inherit;
+	}
+a, button {
+	box-shadow: none !important;
+	outline: none !important;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+ul {
+	list-style: none;
+}
+pre {
+	margin:15px 0;
+}
+/* fonts */
+.font-size-xxs {
+	font-size:xx-small;
+}
+.font-size-xs {
+	font-size:x-small;
+}
+.font-size-sm {
+	font-size:small;
+}
+.font-size-md {
+	font-size:medium;
+}
+.font-size-lg {
+	font-size:large;
+}
+.font-size-xlg {
+	font-size:x-large;
+}
+.font-size-xxlg {
+	font-size:xx-large;
+}
+.font-size-smaller {
+	font-size:smaller;
+}
+.font-size-larger {
+	font-size:larger
+}
+/* font-families */
+.font-montserrat {
+	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+.font-open-sans {
+	font-family: "Open sans", Arial, Helvetica, sans-serif;
+}
+
+/* spacing */
+.letter-spacing--1 {
+	letter-spacing: -1px;
+}
+.text-indent {
+	padding-left: 1.25rem;
+	border-left-width: 5px !important;
+}
+
+/* colors */
+.text-facebook {
+	color: #3b5998 !important;
+}
+.text-twitter {
+	color: #1da1f2 !important;
+}
+.text-pinterest {
+	color: #bd081c !important;
+}
+
+/* backgrounds */
+
+.bg-light-custom {
+	background-color: #E5E5E5;
+}
+.bg-dark-custom {
+	background: #D8D8D8;
+}
+
+/* opacity */
+.opacity-half {
+	opacity: .5;
+}
+
+/* shadows */
+.text-shadow {
+	text-shadow: 0 1px 0 rgba(255,255,255,.75);
+}
+.text-shadow-inverse {
+	text-shadow: 0 1px 0 rgba(0,0,0,.5);
+}
+.box-shadow-top {
+	box-shadow:0 3px 5px rgba(0,0,0,.05) inset;-webkit-box-shadow:0 3px 5px rgba(0,0,0,.05) inset;-moz-box-shadow:0 3px 5px rgba(0,0,0,.05) inset;
+}
+.box-shadow-bottom {
+	box-shadow:0 -3px 5px rgba(0,0,0,.05) inset;-webkit-box-shadow:0 -3px 5px rgba(0,0,0,.05) inset;-moz-box-shadow:0 -3px 5px rgba(0,0,0,.05) inset;
+}
+
+/*  content */
+.content-wrap {
+	width: auto;
+	margin: 0 15px;
+}
+.entry-content p {
+	margin-bottom: 1.4rem;
+}
+
+.site-branding {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	box-shadow:0 1px 5px rgba(0,0,0,.05);-webkit-box-shadow:0 1px 5px rgba(0,0,0,.05);-moz-box-shadow:0 1px 5px rgba(0,0,0,.05);
+}
+
+/* desktop nav */
+.mainNav li {
+	display: inline-block;
+	margin-left: 2rem;
+}
+.mainNav li a, .mainNav li a:visited {
+	display: block;
+	font-family: "Montserrat", Arial, Helvetica, sans-serif;
+	letter-spacing: -.25px;
+	color: #6c757d;
+}
+.mainNav li a:hover, .mobileNav li a:hover, .pageNav li a:hover {
+	color: #444 !important;
+}
+.mainNav li.current-menu-item a, .mobileNav li.current-menu-item a, .pageNav li.current-menu-item a {
+	color: #F00 !important;
+}
+/* mobile nav */
+.hamburger {
+	height: 40px;
+}
+.hamburger-inner, .hamburger-inner:after, .hamburger-inner:before {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+.hamburger-inner, .hamburger-inner::after, .hamburger-inner::before {
+	height: 1px;
+}
+.mobileNav li {
+	display: block;
+	border-top: 1px solid #dee2e6;
+}
+.mobileNav li a, .mobileNav li a {
+	display: block;
+	padding: 1rem 15px;
+}
+.mobileNavOverlay {
+	position: absolute;
+	background: rgba(0,0,0,.7);
+	width: 100%;
+	height: 100%;
+	bottom: 0;
+	left: 0;
+	z-index: 99;
+}
+
+/* page nav */
+.pageNav li {
+	border-bottom: 1px solid #dee2e6!important;
+}
+.pageNav li a, .pageNav li a:visited {
+	display: block;
+	padding: 1rem 0;
+	color: #6c757d;
+}
+
+/* page headers */
+.h1 {
+	font: 500 2rem "Montserrat", Arial, Helvetica, sans-serif;
+}
+.h2 {
+	font: 600 1.7rem "Montserrat", Arial, Helvetica, sans-serif;
+}
+.h3 {
+	font: 600 1.3rem "Montserrat", Arial, Helvetica, sans-serif;
+}
+.h4 {
+	font: 600 1.1rem "Montserrat", Arial, Helvetica, sans-serif;
+}
+.h5 {
+	font: 600 .9rem "Montserrat", Arial, Helvetica, sans-serif;
+}
+
+/* countdown */
+#countdown-wrap {
+	width: 184px;
+	margin: auto;
+}
+#countdown span {
+	font:600 2rem/2.2rem "Open Sans", Arial, Helvetica, sans-serif;
+	letter-spacing:-1px;
+}
+
+/* poll layout */
+#left {
+	background:#FFF;
+}
+#right {
+	background:#F5F5F5;
+}
+.button {
+	font: 1.4rem "Montserrat", Arial, Helvetica, sans-serif;
+	letter-spacing:-1px;
+	background:#FFF;
+	border:1px solid #D5D5D5;
+	box-shadow:inset 0 0 10px rgba(0,0,0,.12), 0 3px 0 rgba(0, 0, 0, .05);-webkit-box-shadow:inset 0 0 10px rgba(0,0,0,.12), 0 3px 0 rgba(0, 0, 0, .05);-moz-box-shadow:inset 0 0 10px rgba(0,0,0,.12), 0 3px 0 rgba(0, 0, 0, .05);
+}
+	.button:hover, .button:focus {
+		background:#FAFAFA;
+		border-color:#BFBFBF;
+		cursor:pointer
+	}
+
+/* results */
+.loading {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	z-index:101;
+	background:rgba(255,255,255,.9);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+	.loading div {
+		position: relative;
+		top:175px;
+		/*
+		top: 50%;
+		transform: translateY(-50%);
+		*/
+	}
+
+.toggle-results:hover .fa-circle,
+.toggle-results:hover .fa-chevron-circle-left {
+	color: #dc3545!important;
+}
+
+/*
+------------------------------------------------------
+MEDIA QUERIES
+------------------------------------------------------
+*/
+
+/* Extra small devices (portrait phones, less than 576px)
+No media query for `xs` since this is the default in Bootstrap */
+
+
+/* Xtra small devices (max 575px) */
+@media (max-width:575px) {
+
+	.h1 {
+		font: 400 1.65rem "Montserrat", Arial, Helvetica, sans-serif;
+	}
+
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width:787px) {
+
+	#canvas-wrap {
+		width: 500px;
+		height: 500px;
+	}
+
+}
+
+
+/* Medium devices (tablets, 768px and up) */
+@media(min-width:768px) and (max-width:991px) {
+
+	#left {
+		background:url(images/left-bg.png) right top repeat-y #FFF;
+	}
+	#right {
+		background:url(images/right-bg.png) left top repeat-y #F5F5F5;
+	}
+	#time-left {
+		border-top: none !important;
+		box-shadow: none ;-webkit-box-shadow: none;-moz-box-shadow: none;
+	}
+	#canvas-wrap {
+		width: 500px;
+		height: 500px;
+	}
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media(min-width:992px) and (max-width:1199px) {
+
+	.content-wrap {
+		width: 960px;
+		margin: auto;
+	}
+	#left {
+		background:url(images/left-bg.png) right top repeat-y #FFF;
+	}
+	#right {
+		background:url(images/right-bg.png) left top repeat-y #F5F5F5;
+	}
+	#time-left {
+		border-top: none !important;
+		box-shadow: none ;-webkit-box-shadow: none;-moz-box-shadow: none;
+	}
+	#canvas-wrap {
+		width: 500px;
+		height: 500px;
+	}
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media(min-width:1200px) {
+
+	.content-wrap {
+		width: 1160px;
+		margin: auto;
+	}
+	#left {
+		background:url(images/left-bg.png) right top repeat-y #FFF;
+	}
+	#right {
+		background:url(images/right-bg.png) left top repeat-y #F5F5F5;
+	}
+	#time-left {
+		border-top: none !important;
+		box-shadow: none ;-webkit-box-shadow: none;-moz-box-shadow: none;
+	}
+	#canvas-wrap {
+		width: 500px;
+		height: 500px;
+	}
+	.w-lg-60 {
+		width: 60% !important;
+	}
+
+}
+
+/* print version */
+@media print {
+	body {
+		width:100%;
+		background:#FFF;
+		color:#000;
+	}
+	.no-print {
+		display:none;
+	}
+	.for-print {
+		display:block;
+	}
+}

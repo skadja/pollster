@@ -1,0 +1,10 @@
+/**
+ * Pollster: Customizer styles
+ */
+
+.customize-control-title.h2 {
+	font-size: 1.25rem;
+}
+.customizer-control-separator.hr {
+	margin-bottom: 2rem;
+}

@@ -1,11 +1,52 @@
 <?php
 /**
- * Twenty Seventeen: Customizer
- *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
+ * Pollster: Customizer
  */
+
+// pollster customizer
+if( class_exists( 'WP_Customize_Control' ) ):
+
+	// remove pre-existing customizer functions
+	add_action( "customize_register", "pollster_theme_customizer_deregister" );
+	function pollster_theme_customizer_deregister( $wp_customize ) {
+		$wp_customize->remove_section( 'colors' ); // colors
+		$wp_customize->remove_section( 'static_front_page' ); // static front page
+		$wp_customize->remove_section( 'custom_css' ); // additional css
+		$wp_customize->remove_section( 'header_image' ); // header media
+		$wp_customize->remove_section( 'background_image' ); // background image
+		$wp_customize->remove_panel("widgets"); // widgets
+	}
+
+	// add customizer stylesheet
+	function pollster_customizer_stylesheet() {
+	wp_register_style( 'pollster_customizer_stylesheet', get_template_directory_uri() . '/assets/css/customizer.css', NULL, NULL, 'all' );
+		wp_enqueue_style( 'pollster_customizer_stylesheet' );
+	}
+	add_action( 'customize_controls_print_styles', 'pollster_customizer_stylesheet' );
+
+	// add customizer scripts
+	function pollster_customize_enqueue() {
+		wp_enqueue_script( 'custom-customize', get_template_directory_uri() . '/assets/js/pollster-customizer.js', array( 'jquery', 'customize-controls' ), false, true );
+		wp_localize_script('custom-customize', 'js_vars', array(
+			'tplDir' => get_theme_file_uri()
+		));
+	}
+	add_action( 'customize_controls_enqueue_scripts', 'pollster_customize_enqueue' );
+
+	// get custom controls
+	require_once 'custom-controls.php';
+
+	// contestants
+	require get_template_directory() . '/inc/customizer/contestants.php';
+
+	// settings
+	require get_template_directory() . '/inc/customizer/settings.php';
+
+endif;
+
+// *** NO NEED TO EDIT BELOW THIS LINE
+
+
 
 /**
  * Add postMessage support for site title and description for the Theme Customizer.
@@ -25,130 +66,8 @@ function twentyseventeen_customize_register( $wp_customize ) {
 		'selector' => '.site-description',
 		'render_callback' => 'twentyseventeen_customize_partial_blogdescription',
 	) );
-
-	/**
-	 * Custom colors.
-	 */
-	$wp_customize->add_setting( 'colorscheme', array(
-		'default'           => 'light',
-		'transport'         => 'postMessage',
-		'sanitize_callback' => 'twentyseventeen_sanitize_colorscheme',
-	) );
-
-	$wp_customize->add_setting( 'colorscheme_hue', array(
-		'default'           => 250,
-		'transport'         => 'postMessage',
-		'sanitize_callback' => 'absint', // The hue is stored as a positive integer.
-	) );
-
-	$wp_customize->add_control( 'colorscheme', array(
-		'type'    => 'radio',
-		'label'    => __( 'Color Scheme', 'twentyseventeen' ),
-		'choices'  => array(
-			'light'  => __( 'Light', 'twentyseventeen' ),
-			'dark'   => __( 'Dark', 'twentyseventeen' ),
-			'custom' => __( 'Custom', 'twentyseventeen' ),
-		),
-		'section'  => 'colors',
-		'priority' => 5,
-	) );
-
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'colorscheme_hue', array(
-		'mode' => 'hue',
-		'section'  => 'colors',
-		'priority' => 6,
-	) ) );
-
-	/**
-	 * Theme options.
-	 */
-	$wp_customize->add_section( 'theme_options', array(
-		'title'    => __( 'Theme Options', 'twentyseventeen' ),
-		'priority' => 130, // Before Additional CSS.
-	) );
-
-	$wp_customize->add_setting( 'page_layout', array(
-		'default'           => 'two-column',
-		'sanitize_callback' => 'twentyseventeen_sanitize_page_layout',
-		'transport'         => 'postMessage',
-	) );
-
-	$wp_customize->add_control( 'page_layout', array(
-		'label'       => __( 'Page Layout', 'twentyseventeen' ),
-		'section'     => 'theme_options',
-		'type'        => 'radio',
-		'description' => __( 'When the two column layout is assigned, the page title is in one column and content is in the other.', 'twentyseventeen' ),
-		'choices'     => array(
-			'one-column' => __( 'One Column', 'twentyseventeen' ),
-			'two-column' => __( 'Two Column', 'twentyseventeen' ),
-		),
-		'active_callback' => 'twentyseventeen_is_view_with_layout_option',
-	) );
-
-	/**
-	 * Filter number of front page sections in Twenty Seventeen.
-	 *
-	 * @since Twenty Seventeen 1.0
-	 *
-	 * @param $num_sections integer
-	 */
-	$num_sections = apply_filters( 'twentyseventeen_front_page_sections', 4 );
-
-	// Create a setting and control for each of the sections available in the theme.
-	for ( $i = 1; $i < ( 1 + $num_sections ); $i++ ) {
-		$wp_customize->add_setting( 'panel_' . $i, array(
-			'default'           => false,
-			'sanitize_callback' => 'absint',
-			'transport'         => 'postMessage',
-		) );
-
-		$wp_customize->add_control( 'panel_' . $i, array(
-			/* translators: %d is the front page section number */
-			'label'          => sprintf( __( 'Front Page Section %d Content', 'twentyseventeen' ), $i ),
-			'description'    => ( 1 !== $i ? '' : __( 'Select pages to feature in each area from the dropdowns. Add an image to a section by setting a featured image in the page editor. Empty sections will not be displayed.', 'twentyseventeen' ) ),
-			'section'        => 'theme_options',
-			'type'           => 'dropdown-pages',
-			'allow_addition' => true,
-			'active_callback' => 'twentyseventeen_is_static_front_page',
-		) );
-
-		$wp_customize->selective_refresh->add_partial( 'panel_' . $i, array(
-			'selector'            => '#panel' . $i,
-			'render_callback'     => 'twentyseventeen_front_page_section',
-			'container_inclusive' => true,
-		) );
-	}
 }
 add_action( 'customize_register', 'twentyseventeen_customize_register' );
-
-/**
- * Sanitize the page layout options.
- */
-function twentyseventeen_sanitize_page_layout( $input ) {
-	$valid = array(
-		'one-column' => __( 'One Column', 'twentyseventeen' ),
-		'two-column' => __( 'Two Column', 'twentyseventeen' ),
-	);
-
-	if ( array_key_exists( $input, $valid ) ) {
-		return $input;
-	}
-
-	return '';
-}
-
-/**
- * Sanitize the colorscheme.
- */
-function twentyseventeen_sanitize_colorscheme( $input ) {
-	$valid = array( 'light', 'dark', 'custom' );
-
-	if ( in_array( $input, $valid ) ) {
-		return $input;
-	}
-
-	return 'light';
-}
 
 /**
  * Render the site title for the selective refresh partial.

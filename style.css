@@ -1,17 +1,19 @@
+@charset "UTF-8";
 /*
 Theme Name: Pollster
 Theme URI: http://pollster.refined.works/
 Author: fano
 Author URI: https://dribbble.com/fano
 Description: Pollster is a FREE WordPress theme for measuring likeability or popularity between two contestants.
+Requires at least: WordPress 5.1
 Version: 2.0
 License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: black, white, light, one-column, two-columns, flexible-width, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
+License URI: LICENSE
+Text Domain: twentynineteen
+Tags: one-column, flexible-header, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, rtl-language-support, sticky-post, threaded-comments, translation-ready
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
-*/
 
 /*
 ------------------------------------------------------
@@ -245,10 +247,10 @@ pre {
 
 /* poll layout */
 #left {
-	background:#FFF;
+	background: #FFF;
 }
 #right {
-	background:#F5F5F5;
+	background: #F5F5F5;
 }
 .button {
 	font: 1.4rem "Montserrat", Arial, Helvetica, sans-serif;
@@ -288,6 +290,15 @@ pre {
 .toggle-results:hover .fa-circle,
 .toggle-results:hover .fa-chevron-circle-left {
 	color: #dc3545!important;
+}
+
+/* footer */
+.copyleft {
+	display: inline-block;
+	text-align: right;
+	margin: 0;
+	-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1);
+	filter: FlipH; -ms-filter: “FlipH”;
 }
 
 /*

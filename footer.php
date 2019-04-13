@@ -34,7 +34,8 @@
 					<?php } ?>
 					<div class="col-12 col-md-4 col-lg-3">
 						<div class="text-center text-md-right font-size-sm">
-							&copy;<?php echo date('Y'); ?> <?php bloginfo('name');?>. All rights reserved.
+							<span class="copyleft">&copy;</span>
+							<?php echo date('Y'); ?> <?php bloginfo('name');?>.
 						</div>
 					</div>
 				</div>

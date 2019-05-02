@@ -18,6 +18,10 @@ HTML5 Shiv, Copyright 2014 Alexander Farkas
 Licenses: MIT/GPL2
 Source: https://github.com/aFarkas/html5shiv
 
+jQuery scrollTo, Copyright 2007-2015 Ariel Flesler
+License: MIT
+Source: https://github.com/flesler/jquery.scrollTo
+
 normalize.css, Copyright 2012-2016 Nicolas Gallagher and Jonathan Neal
 License: MIT
 Source: https://necolas.github.io/normalize.css/
@@ -29,6 +33,10 @@ Source: http://fontawesome.io/
 Hamburger Menu, Copyright Jonathan Suh
 License: MIT
 Source: https://jonsuh.com/hamburgers/
+
+ACF Repeater field, Copyright Elliot Condon
+License: GPLv2 or later
+Source: http://www.advancedcustomfields.com/add-ons/repeater-field/
 
 == Changelog ==
 
